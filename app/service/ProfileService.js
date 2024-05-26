@@ -2,7 +2,7 @@ Ext.define('ZirvaPortal.service.ProfileService', {
     singleton: true,
 
 
-    updatePassword: function(userData, successCallback, failureCallback) {
+    updateInfo: function(userData, successCallback, failureCallback) {
 
         var token = LoginController.getUserStoreToken();
 

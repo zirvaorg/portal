@@ -2,7 +2,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.edit-profile',
 
-    onUpdatePassword: function () {
+    onUpdateInfo: function () {
         var form = this.getView(),
             values = form.getValues(),
             email = values.email,
@@ -19,14 +19,14 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
             email: email,
             username: username,
             password: oldPassword,
-            new_Password: newPassword
+            new_password: newPassword
         };
 
-        ZirvaPortal.service.ProfileService.updatePassword(
+        ZirvaPortal.service.ProfileService.updateInfo(
             userData,
             function (responseData) {
                 if (responseData.success) {
-                    Ext.Msg.alert('Success', 'Password updated successfully!');
+                    Ext.Msg.alert('Success', 'Info updated successfully!');
                     form.up('window').close();
 
                     // update user store email and username

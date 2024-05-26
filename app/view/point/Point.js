@@ -1,55 +1,36 @@
 Ext.define('ZirvaPortal.view.point.Point', {
-   extend: 'Ext.panel.Panel',
+    extend: 'Ext.panel.Panel',
     alias: 'widget.point',
-
+    requires: [
+        'ZirvaPortal.store.PointStore'
+    ],
     items: [{
         title: 'Point History',
         xtype: 'grid',
         extend: 'Ext.grid.Grid',
         height: 400,
         store: {
-            fields: ['date', 'action', 'points'],
-            data: [{
-                date: '1/1/2019 10:00',
-                action: 'register promotion',
-                points: 100
-            },
-            {
-                date: '1/1/2019 10:00',
-                action: 'register promotion',
-                points: -100
-            },
-            {
-                date: '1/1/2019 10:00',
-                action: 'register promotion',
-                points: 11
-            },
-            {
-                date: '1/1/2019 10:00',
-                action: 'register promotion',
-                points: -3
-            }]
+            type: 'pointstore'
         },
         columns: [{
             text: 'Date',
-            dataIndex: 'date',
-            flex: 1
+            dataIndex: 'createdAt',
+            flex: 1,
+            renderer: Ext.util.Format.dateRenderer('m/d/Y H:i')
         }, {
             text: 'Action',
-            dataIndex: 'action',
+            dataIndex: 'Request',
             flex: 1
         }, {
             text: 'Points',
-            dataIndex: 'points',
+            dataIndex: 'Points',
             flex: 1,
             renderer: function(value) {
                 return `<span style="color:${value > 0 ? 'green' : 'red'}">${value}</span>`
             },
-
             cell: {
                 encodeHtml: false
             }
         }]
-    }],
-
+    }]
 });

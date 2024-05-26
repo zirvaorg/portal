@@ -28,6 +28,11 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
                 if (responseData.success) {
                     Ext.Msg.alert('Success', 'Password updated successfully!');
                     form.up('window').close();
+
+                    // update user store email and username
+                    var user = LoginController.userStore.getAt(0);
+                    user.set({email: email, username: username});
+                    
                 } else {
                     Ext.Msg.alert('Update Failure', responseData.message);
                 }

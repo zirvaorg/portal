@@ -102,10 +102,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfile', {
     buttons: [{
         text: 'Save',
         formBind: true,
-        listeners: {
-            click: 'onUpdatePassword'
-        },
-        handler: 'onUpdatePassword',
+        handler: 'onUpdateInfo',
     },
     {
         text: 'Cancel',

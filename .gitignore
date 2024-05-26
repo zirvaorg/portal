@@ -1,0 +1,9 @@
+/build
+bootstrap.*
+classic.json*
+modern.json*
+.sencha
+/ext
+.idea
+*.log
+.chrome_tmp/

@@ -1,0 +1,48 @@
+/*
+ *  This file can be used to set variables and supply global styling.  View specific 
+ *  styling should be located the view's corresponding scss file.
+ */
+$enable-font-awesome: dynamic(true);
+
+$textColor: #fff;
+$fgColor: #fff;
+
+$bgColor: #3d6297;
+$bgHoverColor: #3d6297;
+$bgActiveColor: #4974af;
+
+$toolbar-background-color: dynamic($bgColor);
+$toolbar-color: dynamic($textColor);
+
+$tabbar-background-color: dynamic($bgColor);
+$tab-background-color: dynamic($bgColor);
+$tab-active-background-color: dynamic($bgActiveColor);
+
+$tab-color: dynamic($textColor);
+$tab-pressed-color: dynamic($textColor);
+$tab-hovered-color: dynamic($textColor);
+$tab-active-color: dynamic($textColor);
+$tab-active-pressed-color: dynamic($textColor);
+$tab-active-hovered-color: dynamic($textColor);
+$tab-border-radius: 0;
+$tab-padding: dynamic(5px 8px);
+
+$dialog-border-color: dynamic($bgColor);
+$dialog-header-background-color: dynamic($bgColor);
+
+$panel-header-background-color: dynamic($bgActiveColor);
+
+$gauge-value-fill: dynamic($bgActiveColor);
+$messagebox-header-background-color: dynamic($bgColor);
+$messagebox-border-color: dynamic($bgColor);
+
+$titlebar-background-color: $bgActiveColor;
+
+.x-loading-spinner-outer {
+  height: 25px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}

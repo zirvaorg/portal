@@ -1,10 +1,17 @@
 Ext.define('ZirvaPortal.service.ProfileService', {
     singleton: true,
 
+
     updatePassword: function(userData, successCallback, failureCallback) {
+
+        var token = LoginController.getUserStoreToken();
+
         Ext.Ajax.request({
             url: ZirvaPortal.config.Config.baseUrl + 'user/update',
             method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
             jsonData: userData,
             success: function(response) {
                 if (successCallback) {
@@ -27,8 +34,7 @@ Ext.define('ZirvaPortal.service.ProfileService', {
 
     getUserInfo: function(token, successCallback, failureCallback) {
 
-        const userStore = Ext.getStore('userstore');
-        
+
         Ext.Ajax.request({
             url: ZirvaPortal.config.Config.baseUrl + 'user/info',
             method: 'GET',

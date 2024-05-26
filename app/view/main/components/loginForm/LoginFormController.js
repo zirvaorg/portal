@@ -43,7 +43,8 @@ Ext.define('ZirvaPortal.view.main.components.loginForm.LoginFormController', {
                                 email: userInfo.email,
                                 loggedIn: true,
                                 point: userInfo.remaining_point,
-                                registerDate: userInfo.registered_at
+                                registerDate: userInfo.registered_at,
+                                token: responseData.token
 
                             });
                            

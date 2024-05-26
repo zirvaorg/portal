@@ -54,9 +54,17 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
         if (profileToolbar) {
             mainToolbar.remove(profileToolbar);
         }
-        // this.userStore = Ext.getStore('userstore');
-        console.log("UserStore after logout:", this.userStore);
+       
     },
+
+    getUserStoreToken: function() {
+        var userStore = Ext.getStore('userstore');
+        if (userStore && userStore.getCount() > 0) {
+            var firstRecord = userStore.first();
+            return firstRecord ? firstRecord.get('token') : null;
+        }
+        return null;
+    }
 
     
 });

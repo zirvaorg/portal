@@ -18,8 +18,8 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
         var userData = {
             email: email,
             username: username,
-            oldPassword: oldPassword,
-            newPassword: newPassword
+            password: oldPassword,
+            new_Password: newPassword
         };
 
         ZirvaPortal.service.ProfileService.updatePassword(
@@ -27,6 +27,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
             function (responseData) {
                 if (responseData.success) {
                     Ext.Msg.alert('Success', 'Password updated successfully!');
+                    form.up('window').close();
                 } else {
                     Ext.Msg.alert('Update Failure', responseData.message);
                 }
@@ -42,5 +43,6 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
             e.preventDefault();
             this.onUpdatePassword();
         }
-    }
+    },
+
 });

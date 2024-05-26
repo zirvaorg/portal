@@ -1,4 +1,3 @@
-// app/view/main/components/profile/Profile.js
 Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
     alias: 'widget.profile',
     extend: 'Ext.container.Container',
@@ -15,7 +14,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
         formulas: {
             usernameAndPoint: function(get) {
                 const user = get('user').first();
-                return user ? `${user.get('username')}  ${user.get('point')}` : '';
+                return user ? `${user.get('point')} ${user.get('username')}` : '';
             }
         }
     },

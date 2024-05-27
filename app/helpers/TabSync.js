@@ -38,12 +38,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
 
         if (urlPattern.test(title)) {
             // Add http:// to the title if it doesn't already have a protocol
-            let domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
-
-             // Add "www." if it's not already in the domain
-            if (!domain.startsWith('www.')) {
-                domain = domain.replace('http://', 'http://www.');
-            }
+            const domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
 
             console.log("Valid URL ", domain)
             ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url) {

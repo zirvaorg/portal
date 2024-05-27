@@ -14,7 +14,7 @@ Ext.define('ZirvaPortal.view.point.Point', {
         },
         columns: [{
             text: 'Date',
-            dataIndex: 'createdAt',
+            dataIndex: 'CreatedAt',
             flex: 1,
             renderer: Ext.util.Format.dateRenderer('m/d/Y H:i')
         }, {

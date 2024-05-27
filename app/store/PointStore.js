@@ -5,7 +5,7 @@ Ext.define('ZirvaPortal.store.PointStore', {
         {name: 'ID', type: 'int'},
         {name: 'Points', type: 'int'},
         {name: 'Request', type: 'string'},
-        {name: 'createdAt', type: 'date'}
+        {name: 'CreatedAt', type: 'date'}
     ],
     proxy: {
         type: 'ajax',

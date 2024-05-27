@@ -2,6 +2,10 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
     alias: 'widget.profile',
     extend: 'Ext.container.Container',
 
+    requires: [
+        'Ext.GlobalEvents'
+    ],
+
     viewModel: {
         stores: {
             user: {
@@ -13,8 +17,21 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
         },
         formulas: {
             usernameAndPoint: function(get) {
-                const user = get('user').first();
-                return user ? `${user.get('point')} ${user.get('username')}` : '';
+                const user = get('user');
+                let point, username;
+        
+                if (user instanceof Ext.data.Store) {
+                    // If 'user' is a store, use 'first()' to get the first record
+                    const record = user.first();
+                    point = record.get('point');
+                    username = record.get('username');
+                } else {
+                    // If 'user' is an object, access its properties directly
+                    point = user.point;
+                    username = user.username;
+                }
+        
+                return (point != null && username) ? `${point} ${username}` : '';
             }
         }
     },
@@ -62,5 +79,15 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
                 }
             ]
         }
-    ]
+    ],
+    constructor: function() {
+        this.callParent(arguments);
+        Ext.GlobalEvents.on('userStoreUpdated', this.onUserStoreUpdated, this);
+    },
+
+    onUserStoreUpdated: function() {
+        const user = LoginController.userStore.getAt(0).data;
+        this.getViewModel().set({ user: user });    
+    }
+
 });

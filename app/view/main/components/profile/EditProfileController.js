@@ -33,6 +33,8 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
                     var user = LoginController.userStore.getAt(0);
                     user.set({email: email, username: username});
                     
+                    Ext.GlobalEvents.fireEvent('userStoreUpdated');
+                    
                 } else {
                     Ext.Msg.alert('Update Failure', responseData.message);
                 }

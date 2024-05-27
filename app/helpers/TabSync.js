@@ -3,6 +3,9 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
     alternateClassName: 'TabSync',
 
     addTab: function (title) {
+
+        const urlPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
+
         let tabPanel = Ext.getCmp('mainTabPanel');
 
         let newTab = tabPanel.add({
@@ -14,7 +17,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                 viewModel: {
                     data: {
                         title: title,
-                        img_src: '/resources/img/placeholder.jpg',
+                        img_src: '',
                         ipAddress: '127.0.0.1',
                         organization: 'natro',
                         country: 'turkey',
@@ -31,6 +34,20 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
             closable: true,
         });
         tabPanel.setActiveItem(newTab);
+
+
+        if (urlPattern.test(title)) {
+            // Add http:// to the title if it doesn't already have a protocol
+            const domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+            console.log("Valid URL ", domain)
+            ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url) {
+                newTab.down('result').getViewModel().set('img_src', url);
+            });
+        } else {
+            console.log("Invalid URL")
+        }
+
+      
     },
 
     addCustomTab: function (id, title, pageXType, iconCls) {

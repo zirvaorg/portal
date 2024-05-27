@@ -13,6 +13,10 @@ Ext.define('ZirvaPortal.view.point.Point', {
             type: 'pointstore'
         },
         columns: [{
+            text: 'ID',
+            dataIndex: 'ID',
+            flex: 1
+        }, {
             text: 'Date',
             dataIndex: 'CreatedAt',
             flex: 1,

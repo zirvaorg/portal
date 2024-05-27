@@ -17,7 +17,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                 viewModel: {
                     data: {
                         title: title,
-                        img_src: '',
+                        img_src: '/resources/img/placeholder.jpg',
                         ipAddress: '127.0.0.1',
                         organization: 'natro',
                         country: 'turkey',
@@ -38,7 +38,13 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
 
         if (urlPattern.test(title)) {
             // Add http:// to the title if it doesn't already have a protocol
-            const domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+            let domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+
+             // Add "www." if it's not already in the domain
+            if (!domain.startsWith('www.')) {
+                domain = domain.replace('http://', 'http://www.');
+            }
+
             console.log("Valid URL ", domain)
             ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url) {
                 newTab.down('result').getViewModel().set('img_src', url);

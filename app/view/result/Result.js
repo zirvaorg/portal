@@ -24,9 +24,9 @@ Ext.define('ZirvaPortal.view.result.Result', {
         },
         items: [{
             xtype: 'image',
-            width: 130,
+            width: 177,
             alt: 'Image',
-            style: 'border: 1px solid #4974af;',
+            style: 'border:1px solid #4974af;background-size:cover;',
             bind: {
                 src: '{img_src}'
             },

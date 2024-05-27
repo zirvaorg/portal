@@ -6,17 +6,25 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
 
         const urlPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
 
+        let domain = title;
+        if (urlPattern.test(title)) {
+            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+            console.log("Valid URL ", domain);
+        } else {
+            console.log("Invalid URL");
+        }
+
         let tabPanel = Ext.getCmp('mainTabPanel');
 
         let newTab = tabPanel.add({
-            title: title,
+            title: domain,
             iconCls: 'x-fa fa-sitemap',
             items: [{
                 xtype: 'result',
                 bodyPadding: '10 150',
                 viewModel: {
                     data: {
-                        title: title,
+                        title: domain,
                         img_src: '/resources/img/placeholder.jpg',
                         ipAddress: '127.0.0.1',
                         organization: 'natro',
@@ -35,20 +43,11 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
         });
         tabPanel.setActiveItem(newTab);
 
-
-        if (urlPattern.test(title)) {
-            // Add http:// to the title if it doesn't already have a protocol
-            const domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
-
-            console.log("Valid URL ", domain)
+        if (urlPattern.test(domain)) {
             ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url) {
                 newTab.down('result').getViewModel().set('img_src', url);
             });
-        } else {
-            console.log("Invalid URL")
-        }
-
-      
+        } 
     },
 
     addCustomTab: function (id, title, pageXType, iconCls) {

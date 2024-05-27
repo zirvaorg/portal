@@ -32,9 +32,12 @@ Ext.define('ZirvaPortal.service.SnapshotService', {
                 },
                 failure: function (response) {
                     if (response.status === 500) {
+                        // Display error image
+                        var errorImageUrl = 'resources/img/error.jpg';
+                        if (callback) {
+                            callback.call(scope || this, errorImageUrl);
+                        }
                         Ext.Msg.alert('Error', 'Failed to generate snapshot');
-                    } else {
-                        Ext.Msg.alert('Error', 'Snapshot generation in progress, please wait');
                     }
                 }
             });

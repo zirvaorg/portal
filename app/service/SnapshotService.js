@@ -5,7 +5,7 @@ Ext.define('ZirvaPortal.service.SnapshotService', {
         var token = LoginController.getUserStoreToken();
 
         function requestSnapshot() {
-            var base64Domain = btoa(domain); // Convert domain to base64
+            let base64Domain = btoa(domain);
             var encodedDomain = encodeURIComponent(base64Domain);
 
             Ext.Ajax.request({
@@ -20,10 +20,10 @@ Ext.define('ZirvaPortal.service.SnapshotService', {
                 responseType: 'blob', 
                 success: function (response) {
                     if (response.status === 200) {
-                        var blob = response.responseBlob;
-                        var url = URL.createObjectURL(blob);
+                        let blob = response.responseBlob;
+                        let url = URL.createObjectURL(blob);
                         if (callback) {
-                            callback.call(scope || this, url);
+                            callback.call(scope || this, url, response.getResponseHeader('Content-Date'));
                         }
                     } else if (response.status === 201) {
                         // Wait for 5 seconds and try again
@@ -33,11 +33,10 @@ Ext.define('ZirvaPortal.service.SnapshotService', {
                 failure: function (response) {
                     if (response.status === 500) {
                         // Display error image
-                        var errorImageUrl = 'resources/img/error.jpg';
+                        let errorImageUrl = 'resources/img/placeholder.jpg';
                         if (callback) {
-                            callback.call(scope || this, errorImageUrl);
+                            callback.call(scope || this, errorImageUrl, 0);
                         }
-                        Ext.Msg.alert('Error', 'Failed to generate snapshot');
                     }
                 }
             });

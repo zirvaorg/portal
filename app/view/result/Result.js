@@ -3,6 +3,7 @@ Ext.define('ZirvaPortal.view.result.Result', {
     alias: 'widget.result',
 
     requires: [
+        'Ext.window.Window',
         'Ext.layout.VBox',
         'ZirvaPortal.view.result.components.container.Container'
     ],
@@ -16,6 +17,8 @@ Ext.define('ZirvaPortal.view.result.Result', {
         flex: 1,
     },
 
+
+
     items: [{
         flex: 1,
         layout: {
@@ -23,25 +26,67 @@ Ext.define('ZirvaPortal.view.result.Result', {
             align: 'stretch'
         },
         items: [{
-            xtype: 'image',
-            width: 177,
-            alt: 'Image',
-            style: 'border:1px solid #4974af;background-size:cover;',
-            bind: {
-                src: '{img_src}'
-            },
-        }, {
+            xtype: 'container',
+            layout: 'vbox',
+            items: [{
+                xtype: 'image',
+                width: 177,
+                height: '90%',
+                alt: 'Image',
+                style: 'border:1px solid #4974af;cursor:pointer;',
+                bind: {
+                    src: '{img_src}'
+                },
+                listeners: {
+                    tap: function() {
+                        var resultViewModel = this.up('result').getViewModel();
+                        let win = new Ext.window.Window({
+                            title: 'Snapshot: ' + resultViewModel.get('title'),
+                            width: 800,
+                            height: 568,
+                            closable: true,
+                            tools: [{
+                                type: 'print',
+                                tooltip: 'Download',
+                                handler: function() {
+                                    let downloadLink = document.createElement('a');
+                                    downloadLink.href = resultViewModel.get('img_src');
+                                    downloadLink.download = 'zirva-snapshot.png';
+                                    document.body.appendChild(downloadLink);
+                                    downloadLink.click();
+                                    document.body.removeChild(downloadLink);
+                                }
+                            }],
+                            maximizable: true,
+                            items: [{
+                                xtype: 'image',
+                                width: '100%',
+                                height: '100%',
+                                style: 'background-size:contain;',
+                                src: resultViewModel.get('img_src'),
+                            }]
+                        });
+
+                        win.show();
+                    }
+                },
+            },{
+                xtype: 'component',
+                itemId: 'img-alt',
+                style: {
+                    'text-align': 'center'
+                },
+                html: '...'
+            }]
+        },{
             xtype: 'result-title',
             bind: {
                 viewModel: {
                     data: {
                         title: '{title}',
-                        scan_date: '{scan_date}',
-                        scan_date_human_readable: '{scan_date_human_readable}',
                     }
                 }
             }
-
         }]
     },
         {

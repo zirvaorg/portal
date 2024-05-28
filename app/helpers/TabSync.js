@@ -3,12 +3,11 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
     alternateClassName: 'TabSync',
 
     addTab: function (title) {
-
         const urlPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
 
         let domain = title;
         if (urlPattern.test(title)) {
-            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title;
             console.log("Valid URL ", domain);
         } else {
             console.log("Invalid URL");
@@ -25,7 +24,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                 viewModel: {
                     data: {
                         title: domain,
-                        img_src: '/resources/img/placeholder.jpg',
+                        img_src: '/resources/img/loading.svg',
                         ipAddress: '127.0.0.1',
                         organization: 'natro',
                         country: 'turkey',
@@ -44,8 +43,10 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
         tabPanel.setActiveItem(newTab);
 
         if (urlPattern.test(domain)) {
-            ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url) {
+            ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url, status) {
                 newTab.down('result').getViewModel().set('img_src', url);
+                newTab.down('result').down('image').setStyle('background-size:cover;');
+                newTab.down('result').down('#img-alt').setHtml(status ? Ext.Date.format(new Date(status), 'm/d/Y H:i') : 'cannot get snapshot');
             });
         } 
     },

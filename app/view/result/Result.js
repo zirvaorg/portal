@@ -23,25 +23,34 @@ Ext.define('ZirvaPortal.view.result.Result', {
             align: 'stretch'
         },
         items: [{
-            xtype: 'image',
-            width: 177,
-            alt: 'Image',
-            style: 'border:1px solid #4974af;background-size:cover;',
-            bind: {
-                src: '{img_src}'
-            },
-        }, {
+            xtype: 'container',
+            layout: 'vbox',
+            items: [{
+                xtype: 'image',
+                width: 177,
+                height: '90%',
+                alt: 'Image',
+                style: 'border:1px solid #4974af;',
+                bind: {
+                    src: '{img_src}'
+                },
+            },{
+                xtype: 'component',
+                itemId: 'img-alt',
+                style: {
+                    'text-align': 'center'
+                },
+                html: '...'
+            }]
+        },{
             xtype: 'result-title',
             bind: {
                 viewModel: {
                     data: {
                         title: '{title}',
-                        scan_date: '{scan_date}',
-                        scan_date_human_readable: '{scan_date_human_readable}',
                     }
                 }
             }
-
         }]
     },
         {

@@ -8,7 +8,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
 
         let domain = title;
         if (urlPattern.test(title)) {
-            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title + '/';
+            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title;
             console.log("Valid URL ", domain);
         } else {
             console.log("Invalid URL");

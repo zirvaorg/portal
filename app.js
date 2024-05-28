@@ -7,6 +7,10 @@ Ext.application({
 
     name: 'ZirvaPortal',
 
+    stores: [
+        'ZirvaPortal.store.UserStore' // Reference must match the store definition exactly
+    ],
+
     requires: [
         // This will automatically load all classes in the ZirvaPortal namespace
         // so that application classes do not need to require each other.

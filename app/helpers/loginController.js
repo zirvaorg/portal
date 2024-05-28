@@ -58,12 +58,8 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     },
 
     getUserStoreToken: function() {
-        var userStore = Ext.getStore('userstore');
-        if (userStore && userStore.getCount() > 0) {
-            var firstRecord = userStore.first();
-            return firstRecord ? firstRecord.get('token') : null;
-        }
-        return null;
+        var userstore = LoginController.userStore.getAt(0);
+        return userstore ? userstore.get('token') : null;
     }
 
     

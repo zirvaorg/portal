@@ -9,11 +9,9 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
     viewModel: {
         stores: {
             user: {
-                type: 'userstore'
+                type: 'userstore',
+                autoLoad: true,
             }
-        },
-        data: {
-            username: 'Guest'
         },
         formulas: {
             usernameAndPoint: function(get) {

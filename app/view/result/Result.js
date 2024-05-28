@@ -45,6 +45,18 @@ Ext.define('ZirvaPortal.view.result.Result', {
                             width: 800,
                             height: 568,
                             closable: true,
+                            tools: [{
+                                type: 'print',
+                                tooltip: 'Download',
+                                handler: function() {
+                                    let downloadLink = document.createElement('a');
+                                    downloadLink.href = resultViewModel.get('img_src');
+                                    downloadLink.download = 'zirva-snapshot.png';
+                                    document.body.appendChild(downloadLink);
+                                    downloadLink.click();
+                                    document.body.removeChild(downloadLink);
+                                }
+                            }],
                             maximizable: true,
                             items: [{
                                 xtype: 'image',

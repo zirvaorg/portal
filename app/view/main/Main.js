@@ -5,6 +5,7 @@ Ext.define('ZirvaPortal.view.main.Main', {
         'Ext.Toolbar',
         'ZirvaPortal.view.main.components.loginForm.LoginForm',
         'Ext.layout.overflow.Scroller',
+        'ZirvaPortal.store.PointStore',
     ],
 
     layout: {
@@ -108,5 +109,22 @@ Ext.define('ZirvaPortal.view.main.Main', {
                 text: 'Contact'
             }]
         }]
-    }]
+    }],
+
+    initialize: function () {
+        this.callParent(arguments);
+
+        var mainTabPanel = this.down('#mainTabPanel');
+
+        // Listen for tab changes, if Point History tab is active, reload the store
+        mainTabPanel.on('activeitemchange', function(sender, value, oldValue) {
+            console.log('Active tab changed to', value.title);
+            if (value.title === 'Point History') {
+                var pointStore = Ext.getStore('pointstore');
+                if (pointStore) {
+                    pointStore.load();
+                }
+            }
+        });  
+    }
 });

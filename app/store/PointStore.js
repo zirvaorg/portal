@@ -1,6 +1,7 @@
 Ext.define('ZirvaPortal.store.PointStore', {
     extend: 'Ext.data.Store',
     alias: 'store.pointstore',
+    storeId: 'pointstore',
     fields: [
         {name: 'ID', type: 'int'},
         {name: 'Points', type: 'int'},

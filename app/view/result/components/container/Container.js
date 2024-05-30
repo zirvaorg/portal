@@ -2,11 +2,6 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
     extend: 'Ext.container.Container',
     xtype: 'dashboard',
 
-    requires: [
-        'Ext.grid.Grid',
-        'Ext.tab.Panel'
-    ],
-
     controller: 'container',
     items: [
         {
@@ -109,7 +104,7 @@ function whoisCustomTab(actionType, domain) {
     let gridPanel = createGridPanel(actionType, domain);
 
     let outputComponent = {
-        flex: 3,
+        flex: 2,
         xtype: 'container',
         scrollable: true,
         style: {
@@ -121,6 +116,7 @@ function whoisCustomTab(actionType, domain) {
             borderColor: '#4974af',
             borderStyle: 'solid',
             borderLeft: '0',
+            fontSize: '12px',
         },
         html: '<pre>Loading...</pre>'
     };
@@ -130,18 +126,13 @@ function whoisCustomTab(actionType, domain) {
         callback: function(records, operation, success) {
             function createGridColumns() {
                 return [
-                  { text: 'Key', dataIndex: 'key', width: 95, 
+                  { text: 'Key', dataIndex: 'key', width: 120,
                   renderer: function(value, record, dataIndex, cell) {
-                        cell.setStyle({ fontWeight: 'bold', color: '#213547' });
+                        cell.setStyle({ fontWeight: 'bold', color: '#213547', textTransform: 'capitalize' });
                         return value;
-                    } 
+                    }
                 },
-                  { text: 'Value', dataIndex: 'value', flex: 1, 
-                  renderer: function(value, record, dataIndex, cell) {
-                    return value;
-                        } 
-                    },
-                ];
+                { text: 'Value', dataIndex: 'value', flex: 1 }];
               }
 
             if (success) {

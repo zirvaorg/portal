@@ -8,14 +8,21 @@ Ext.define('ZirvaPortal.view.point.Point', {
         title: 'Point History',
         xtype: 'grid',
         extend: 'Ext.grid.Grid',
-        height: 400,
+        height: '500px',
+        scrollable: true,
+        striped: true,
+        style: {
+            borderWidth: '1px',
+            borderColor: '#4974af',
+            borderStyle: 'solid',
+        },
         store: {
             type: 'pointstore'
         },
         columns: [{
             text: 'ID',
             dataIndex: 'ID',
-            flex: 1
+            width: 100
         }, {
             text: 'Date',
             dataIndex: 'CreatedAt',

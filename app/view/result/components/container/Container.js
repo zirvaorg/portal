@@ -82,9 +82,9 @@ function createGridPanelMultiple(actionTypes) {
         xtype: 'container',
         layout: 'hbox',
         items: actionTypes.map((actionType, index) => {
-            let margin = '0 4 0 0';
+            let margin = '10 10 0 0';
             if (index === actionTypes.length - 1) {
-                margin = '0 0 0 0';
+                margin = '10 0 0 0';
             }
             return Ext.apply(createGridPanel(actionType), { margin: margin, title: actionType });
         })

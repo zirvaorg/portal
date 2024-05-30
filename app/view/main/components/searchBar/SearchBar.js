@@ -10,7 +10,7 @@ Ext.define('ZirvaPortal.view.main.components.searchBar.SearchBar', {
     id: 'searchBar',
     ui: 'solo',
     flex: 3,
-    placeholder: 'Hostname / IP Address / Email Address',
+    autoComplete: false,
     listeners: {
         specialkey: function (field, e) {
             if (e.getKey() === e.ENTER) {
@@ -19,4 +19,10 @@ Ext.define('ZirvaPortal.view.main.components.searchBar.SearchBar', {
             }
         },
     },
+
+    onRender: function(field) {
+        this.callParent(arguments);
+        this.focus(false, 1000);
+        this.setPlaceholder('Hostname / IP Address / Email');
+    }
 });

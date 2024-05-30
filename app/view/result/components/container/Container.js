@@ -73,10 +73,10 @@ function whoIsGridPanel(actionType) {
             scrollable: true,
             itemId: actionType,
             striped: true,
-            masked: {
+            /*masked: {
                 xtype: 'loadmask',
                 message: 'Loading...',
-            },
+            },*/
             store: {
                 fields: ['key', 'value'],
                 data: [

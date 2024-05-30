@@ -17,6 +17,10 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
             username: function(get) {
                 var user = get('user').first();
                 return user ? user.get('username') : '';
+            },
+            point: function(get) {
+                var user = get('user').first();
+                return user ? user.get('point') : '';
             }
         }
     },
@@ -27,7 +31,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
             height: 30,
             iconCls: 'fas fa-coins',
             bind: {
-                text: '{username}'
+                text: '{point} {username}'
             },
             handler: function () {
                 TabSync.addCustomTab('tab_point_history', 'Point History', 'point', 'fas fa-coins');

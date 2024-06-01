@@ -17,7 +17,7 @@ Ext.define('ZirvaPortal.view.point.Point', {
             borderStyle: 'solid',
         },
         store: {
-            type: 'pointstore'
+            type: 'pointStore'
         },
         columns: [{
             text: 'ID',

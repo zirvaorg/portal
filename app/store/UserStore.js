@@ -1,7 +1,7 @@
 Ext.define('ZirvaPortal.store.UserStore', {
     extend: 'Ext.data.Store',
-    alias: 'store.userstore', 
-    storeId: 'userstore', 
+    alias: 'store.userStore',
+    storeId: 'userStore',
 
     fields: ['username', 'loggedIn', 'token', 'email', 'point', 'registerDate'],
 

@@ -9,7 +9,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfile', {
     viewModel: {
         stores: {
             user: {
-                type: 'userstore'
+                type: 'userStore'
             }
         },
         formulas: {

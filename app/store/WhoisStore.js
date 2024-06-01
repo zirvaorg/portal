@@ -1,6 +1,6 @@
 Ext.define('ZirvaPortal.store.WhoisStore', {
     extend: 'Ext.data.Store',
-    alias: 'store.whoisstore',
+    alias: 'store.whoisStore',
     fields: ['key', 'value'],
     proxy: {
         type: 'ajax',

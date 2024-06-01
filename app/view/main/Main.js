@@ -120,7 +120,7 @@ Ext.define('ZirvaPortal.view.main.Main', {
         mainTabPanel.on('activeitemchange', function(sender, value, oldValue) {
             console.log('Active tab changed to', value.title);
             if (value.title === 'Point History') {
-                var pointStore = Ext.getStore('pointstore');
+                var pointStore = Ext.getStore('pointStore');
                 if (pointStore) {
                     pointStore.load();
                 }

@@ -4,7 +4,7 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     alternateClassName: 'LoginController',
     userStore: null,
     init: function() {
-        this.userStore = Ext.getStore('userstore');
+        this.userStore = Ext.getStore('userStore');
     },
 
     isAuth: function () {

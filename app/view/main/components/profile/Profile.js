@@ -31,7 +31,7 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
             height: 30,
             iconCls: 'fas fa-coins',
             bind: {
-                text: '{point} {username}'
+                text: '({point}) {username}'
             },
             handler: function () {
                 TabSync.addCustomTab('tab_point_history', 'Point History', 'point', 'fas fa-coins');

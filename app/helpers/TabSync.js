@@ -23,7 +23,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                 bodyPadding: '10 150',
                 viewModel: {
                     data: {
-                        title: domain,
+                        param: domain,
                         img_src: '/resources/img/loading.svg',
                         ipAddress: '127.0.0.1',
                         organization: 'natro',
@@ -35,7 +35,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                         ipRange: '1127.0.0.1 - 127.0.0.0',
                         https: 'OK',
                         dns: 'OK'
-                        }
+                    }
                 },
             }],
             closable: true,

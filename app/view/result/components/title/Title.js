@@ -10,7 +10,7 @@ Ext.define('ZirvaPortal.view.result.components.title.Title', {
         {
             xtype: 'panel',
             bind: {
-                title: '{title}'
+                title: '{param}'
             },
 
             iconCls: 'x-fa fa-sitemap',

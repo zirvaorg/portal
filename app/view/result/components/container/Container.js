@@ -23,45 +23,83 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
                 {
                     title: 'Health',
                     iconCls: 'x-fa fa-heart-broken',
-                    items: [createGridPanelMultiple(['HTTP', 'PING', 'DNS'])]
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add(createGridPanelMultiple(['HTTP', 'PING', 'DNS']));
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
                 },
                 {
-                    title: 'WhoIs',
+                    title: 'Whois',
                     iconCls: 'x-fa fa-user-secret',
-                    items: [whoisCustomTab('whois', 'google.com')]
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add(whoisCustomTab('whois', this.up('result').getViewModel().get('param')));
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
                 },
                 {
                     title: 'Subdomains',
                     iconCls: 'x-fa fa-sitemap',
-                    items: [createGridPanel('subdomains')]
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add(createGridPanel('Subdomains'));
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
                 },
                 {
                     title: 'DNS History',
                     iconCls: 'x-fa fa-history',
-                    items: [createGridPanel('DNS History')]
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add(createGridPanel('DNS History'));
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
                 },
                 {
                     title: 'MX Records',
                     iconCls: 'x-fa fa-envelope',
-                    items: [createGridPanel('MX Records')]
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add(createGridPanel('MX Records'));
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
                 }
             ]
         }
     ]
 });
 
-function createGridPanel(actionType, domain) {
+function createGridPanel(actionType, param) {
     let storeData = {};
     let columns = [];
 
     switch (actionType) {
         case 'whois':
             storeData = Ext.create('ZirvaPortal.store.WhoisStore');
-            if (domain) {
-                console.log("Domain: ", domain);
-                storeData.getProxy().setUrl( ZirvaPortal.config.Config.baseUrl +`/service/whois?domain=${domain}`);
+            if (param) {
+                storeData.getProxy().setUrl( ZirvaPortal.config.Config.baseUrl +`/service/whois?domain=${param}` );
             }
-
             break;
         default:
             storeData = generateSampleData();
@@ -100,13 +138,12 @@ function generateSampleData() {
     }
 }
 
-function whoisCustomTab(actionType, domain) {
-    let gridPanel = createGridPanel(actionType, domain);
-
-    let outputComponent = {
+function whoisCustomTab(actionType, param) {
+    let gridPanel =  Ext.create('ZirvaPortal.view.result.components.container.ResultGrid', createGridPanel(actionType, param));
+    let outputComponent = Ext.create('Ext.container.Container', {
         flex: 2,
-        xtype: 'container',
         scrollable: true,
+        height: 300,
         style: {
             padding: '0 5px',
             backgroundColor: '#f0f0f0',
@@ -118,54 +155,58 @@ function whoisCustomTab(actionType, domain) {
             borderLeft: '0',
             fontSize: '12px',
         },
-        html: '<pre>Loading...</pre>'
-    };
-
+        masked: {
+            xtype: 'loadmask',
+            message: 'Loading...',
+        },
+    });
 
     gridPanel.store.load({
         callback: function(records, operation, success) {
-            function createGridColumns() {
-                return [
-                  { text: 'Key', dataIndex: 'key', width: 120,
-                  renderer: function(value, record, dataIndex, cell) {
+            if (!success) {
+                console.error('Store load operation failed:', operation.getError());
+                return;
+            }
+
+            const whoisResponse = operation.getResponse().responseJson;
+            const whoisData = whoisResponse.whois;
+
+            if (!whoisData || !whoisData.output) {
+                return;
+            }
+
+            const gridColumns = [
+                {
+                    text: 'Key',
+                    dataIndex: 'key',
+                    width: 120,
+                    renderer: function(value, record, dataIndex, cell) {
                         cell.setStyle({ fontWeight: 'bold', color: '#213547', textTransform: 'capitalize' });
                         return value;
                     }
                 },
-                { text: 'Value', dataIndex: 'value', flex: 1 }];
-              }
-
-            if (success) {
-                try {
-                    const whoisResponse = operation.getResponse().responseJson;
-                    const whoisData = whoisResponse.whois;
-
-                    if (whoisData && whoisData.output) {
-                        outputComponent.html = `<pre>${whoisData.output}</pre>`;
-
-                        const gridColumns = createGridColumns();
-                        const newData = [{ key: 'whois server', value: whoisData.whois_server }]
-                            .concat(Object.keys(whoisData.details)
-                                .map(key =>  ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
-                      
-
-                        gridPanel.columns = gridColumns;
-                        gridPanel.store.setData(newData);
-
-                    } 
-                } catch (e) {
-                    console.error('Error processing response:', e);
+                {
+                    text: 'Value',
+                    dataIndex: 'value',
+                    flex: 1
                 }
-            } else {
-                console.error('Store load operation failed:', operation.getError());
-            }
+            ];
+
+            const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
+                .concat(Object.keys(whoisData.details)
+                    .map(key =>  ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
+
+            gridPanel.setStore(parsedData);
+            gridPanel.setColumns(gridColumns);
+
+            outputComponent.setHtml(`<pre>${whoisData.output}</pre>`);
+            outputComponent.unmask();
         }
     });
 
     return {
         xtype: 'container',
         layout: 'hbox',
-        height: 300,
         items: [gridPanel, outputComponent]
     };
 }

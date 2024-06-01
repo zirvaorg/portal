@@ -17,8 +17,6 @@ Ext.define('ZirvaPortal.view.result.Result', {
         flex: 1,
     },
 
-
-
     items: [{
         flex: 1,
         layout: {
@@ -83,7 +81,7 @@ Ext.define('ZirvaPortal.view.result.Result', {
             bind: {
                 viewModel: {
                     data: {
-                        title: '{title}',
+                        title: '{param}',
                     }
                 }
             }
@@ -98,6 +96,13 @@ Ext.define('ZirvaPortal.view.result.Result', {
                 fontSize: '14px',
                 minHeight: '400px',
             },
+            bind: {
+                viewModel: {
+                    data: {
+                        param: '{param}',
+                    }
+                }
+            }
         }]
 
 });

@@ -105,21 +105,5 @@ Ext.define('ZirvaPortal.view.main.Main', {
                 text: 'Contact'
             }]
         }]
-    }],
-
-    initialize: function () {
-        this.callParent(arguments);
-
-        var mainTabPanel = this.down('#mainTabPanel');
-        // Listen for tab changes, if Point History tab is active, reload the store
-        mainTabPanel.on('activeitemchange', function(sender, value, oldValue) {
-            console.log('Active tab changed to', value.id);
-            if (value.id === 'tab_point_history') {
-                let pointStore = Ext.getStore('pointStore');
-                if (pointStore) {
-                    pointStore.load();
-                }
-            }
-        });  
-    }
+    }]
 });

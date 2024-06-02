@@ -47,5 +47,9 @@ Ext.define('ZirvaPortal.view.point.Point', {
                 encodeHtml: false
             }
         }]
-    }]
+    }],
+    onRender: function() {
+        this.callParent(arguments);
+        this.down('grid').getStore().load();
+    }
 });

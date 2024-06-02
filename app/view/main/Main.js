@@ -5,6 +5,7 @@ Ext.define('ZirvaPortal.view.main.Main', {
         'Ext.layout.HBox',
         'Ext.layout.VBox',
         'Ext.tab.Panel',
+        'Ext.layout.overflow.Scroller',
         'ZirvaPortal.view.main.components.searchBar.SearchBar'
     ],
 
@@ -49,10 +50,15 @@ Ext.define('ZirvaPortal.view.main.Main', {
         layout: {
             type: 'card',
             animation: false,
-            pack: 'start',
-            overflow: 'scroller'
         },
         autoSize: true,
+
+        tabBar: {
+            layout: {
+                pack: 'start',
+                overflow: 'scroller'
+            },
+        },
 
         defaults: {
             scrollable: true,

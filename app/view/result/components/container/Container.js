@@ -5,6 +5,7 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
     requires: [
         'Ext.layout.Card',
         'Ext.tab.Panel',
+        'Ext.layout.overflow.Scroller',
         'ZirvaPortal.view.result.components.tabs.Health',
         'ZirvaPortal.view.result.components.tabs.Whois'
     ],
@@ -16,8 +17,13 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
             layout: {
                 type: 'card',
                 animation: false,
-                pack: 'start',
-                overflow: 'scroller'
+            },
+
+            tabBar: {
+                layout: {
+                    pack: 'start',
+                    overflow: 'scroller'
+                },
             },
 
             items: [

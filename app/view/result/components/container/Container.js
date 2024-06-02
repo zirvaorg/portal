@@ -16,13 +16,8 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
             layout: {
                 type: 'card',
                 animation: false,
-            },
-
-            tabBar: {
-                layout: {
-                    pack: 'start',
-                    overflow: 'scroller'
-                },
+                pack: 'start',
+                overflow: 'scroller'
             },
 
             items: [

@@ -49,15 +49,10 @@ Ext.define('ZirvaPortal.view.main.Main', {
         layout: {
             type: 'card',
             animation: false,
+            pack: 'start',
+            overflow: 'scroller'
         },
         autoSize: true,
-
-        tabBar: {
-            layout: {
-                pack: 'start',
-                overflow: 'scroller'
-            },
-        },
 
         defaults: {
             scrollable: true,

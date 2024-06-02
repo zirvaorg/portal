@@ -3,7 +3,7 @@ Ext.define('ZirvaPortal.view.main.components.registerForm.RegisterFormController
 
     alias: 'controller.register-form',
 
-    nowRegister: function () {
+    register: function () {
         let form = this.getView(),
             values = form.getValues(),
             email = values.email,
@@ -48,7 +48,7 @@ Ext.define('ZirvaPortal.view.main.components.registerForm.RegisterFormController
     handleKeyUp: function(field, e) {
         if (e.getKey() === e.ENTER) {
             e.preventDefault();
-            this.nowRegister();
+            this.register();
         }
     }
 });

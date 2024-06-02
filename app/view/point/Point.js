@@ -1,9 +1,13 @@
 Ext.define('ZirvaPortal.view.point.Point', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.point',
+
     requires: [
+        'Ext.grid.Grid',
+        'Ext.util.Format',
         'ZirvaPortal.store.PointStore'
     ],
+
     items: [{
         title: 'Point History',
         xtype: 'grid',

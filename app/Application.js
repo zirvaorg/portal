@@ -8,7 +8,6 @@ Ext.define('ZirvaPortal.Application', {
     ],
 
     requires: [
-        'ZirvaPortal.store.UserStore',
         'ZirvaPortal.helpers.LoginController'
     ],
 

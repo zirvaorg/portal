@@ -6,12 +6,11 @@ Ext.define('ZirvaPortal.store.WhoisStore', {
         type: 'ajax',
         reader: {
             type: 'json',
-            rootProperty: 'data'
         }
     },
     listeners: {
         beforeload: function(store) {
-            var token = LoginController.getUserStoreToken();
+            let token = LoginController.getUserStoreToken();
             store.getProxy().setHeaders({
                 'Authorization': `Bearer ${token}`
             });

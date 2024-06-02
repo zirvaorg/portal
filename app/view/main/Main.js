@@ -2,10 +2,10 @@ Ext.define('ZirvaPortal.view.main.Main', {
     extend: 'Ext.container.Container',
 
     requires: [
-        'Ext.Toolbar',
-        'ZirvaPortal.view.main.components.loginForm.LoginForm',
-        'Ext.layout.overflow.Scroller',
-        'ZirvaPortal.store.PointStore',
+        'Ext.layout.HBox',
+        'Ext.layout.VBox',
+        'Ext.tab.Panel',
+        'ZirvaPortal.view.main.components.searchBar.SearchBar'
     ],
 
     layout: {
@@ -69,11 +69,6 @@ Ext.define('ZirvaPortal.view.main.Main', {
 
         items: [{
             title: 'home',
-            items: [{
-                //xtype: 'stats-bar',
-                //xtype: 'result',
-                //bodyPadding: '10 150',
-            }],
             iconCls: 'x-fa fa-home',
         }]
     }, {
@@ -115,12 +110,11 @@ Ext.define('ZirvaPortal.view.main.Main', {
         this.callParent(arguments);
 
         var mainTabPanel = this.down('#mainTabPanel');
-
         // Listen for tab changes, if Point History tab is active, reload the store
         mainTabPanel.on('activeitemchange', function(sender, value, oldValue) {
-            console.log('Active tab changed to', value.title);
-            if (value.title === 'Point History') {
-                var pointStore = Ext.getStore('pointStore');
+            console.log('Active tab changed to', value.id);
+            if (value.id === 'tab_point_history') {
+                let pointStore = Ext.getStore('pointStore');
                 if (pointStore) {
                     pointStore.load();
                 }

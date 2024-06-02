@@ -2,6 +2,11 @@ Ext.define('ZirvaPortal.view.result.components.title.Title', {
     extend: 'Ext.container.Container',
     alias: 'widget.result-title',
 
+    requires: [
+        'Ext.layout.HBox',
+        'Ext.layout.VBox'
+    ],
+
     flex: 1,
     style: 'background-color: #f3f4f6;color:#383838;border:1px solid #4974af;',
     margin: '0 0 0 10',

@@ -2,10 +2,6 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
     alias: 'widget.profile',
     extend: 'Ext.container.Container',
 
-    requires: [
-        'Ext.GlobalEvents'
-    ],
-
     viewModel: {
         stores: {
             user: {
@@ -79,5 +75,4 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
         var user = LoginController.userStore.getAt(0).data;
         this.getViewModel().set({ username: user.username });
     }
-
 });

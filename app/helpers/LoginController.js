@@ -1,4 +1,3 @@
-// app/helpers/LoginController.js
 Ext.define('ZirvaPortal.helpers.LoginController', {
     singleton: true,
     alternateClassName: 'LoginController',
@@ -8,7 +7,7 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     },
 
     isAuth: function () {
-        try {            
+        try {
             if (this.userStore && this.userStore.getCount() > 0) {
                 const firstRecord = this.userStore.first();
                 if (firstRecord) {
@@ -61,6 +60,4 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
         var userstore = LoginController.userStore.getAt(0);
         return userstore ? userstore.get('token') : null;
     }
-
-    
 });

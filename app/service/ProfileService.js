@@ -1,9 +1,7 @@
 Ext.define('ZirvaPortal.service.ProfileService', {
     singleton: true,
 
-
     updateInfo: function(userData, successCallback, failureCallback) {
-
         var token = LoginController.getUserStoreToken();
 
         Ext.Ajax.request({
@@ -33,8 +31,6 @@ Ext.define('ZirvaPortal.service.ProfileService', {
     },
 
     getUserInfo: function(token, successCallback, failureCallback) {
-
-
         Ext.Ajax.request({
             url: ZirvaPortal.config.Config.baseUrl + 'user/info',
             method: 'GET',
@@ -59,5 +55,4 @@ Ext.define('ZirvaPortal.service.ProfileService', {
             }
         });
     }
-
 });

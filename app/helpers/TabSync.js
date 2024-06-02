@@ -14,7 +14,6 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
         }
 
         let tabPanel = Ext.getCmp('mainTabPanel');
-
         let newTab = tabPanel.add({
             title: domain,
             iconCls: 'x-fa fa-sitemap',
@@ -25,30 +24,12 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
                     data: {
                         param: domain,
                         img_src: '/resources/img/loading.svg',
-                        ipAddress: '127.0.0.1',
-                        organization: 'natro',
-                        country: 'turkey',
-                        http: 'OK',
-                        tcp: 'OK',
-                        hostname: '127.0.0.1',
-                        isp: 'natro hostinger',
-                        ipRange: '1127.0.0.1 - 127.0.0.0',
-                        https: 'OK',
-                        dns: 'OK'
                     }
                 },
             }],
             closable: true,
         });
         tabPanel.setActiveItem(newTab);
-
-        if (urlPattern.test(domain)) {
-            ZirvaPortal.service.SnapshotService.generateSnapshot(domain, function (url, status) {
-                newTab.down('result').getViewModel().set('img_src', url);
-                newTab.down('result').down('image').setStyle('background-size:cover;');
-                newTab.down('result').down('#img-alt').setHtml(status ? Ext.Date.format(new Date(status), 'm/d/Y H:i') : 'cannot get snapshot');
-            });
-        } 
     },
 
     addCustomTab: function (id, title, pageXType, iconCls) {
@@ -80,5 +61,4 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
     removeAllTabs: function (tabPanel) {
         tabPanel.removeAll();
     },
-
 });

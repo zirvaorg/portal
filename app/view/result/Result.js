@@ -3,9 +3,11 @@ Ext.define('ZirvaPortal.view.result.Result', {
     alias: 'widget.result',
 
     requires: [
-        'Ext.window.Window',
+        'Ext.layout.Fit',
+        'Ext.layout.HBox',
         'Ext.layout.VBox',
-        'ZirvaPortal.view.result.components.container.Container'
+        'ZirvaPortal.view.result.components.container.Container',
+        'ZirvaPortal.view.result.components.title.Title'
     ],
 
     layout: {
@@ -35,11 +37,20 @@ Ext.define('ZirvaPortal.view.result.Result', {
                 bind: {
                     src: '{img_src}'
                 },
+                onRender: function() {
+                    let img = this;
+                    ZirvaPortal.service.SnapshotService.generateSnapshot(this.up('result').getViewModel().get('param'), function (url, status) {
+                        img.setSrc(url);
+                        img.setStyle('background-size:cover;');
+                        img.up('result').getViewModel().set('img_src', url);
+                        img.up('result').down('#img-alt').setHtml(status ? Ext.Date.format(new Date(status), 'm/d/Y H:i') : 'cannot get snapshot');
+                    });
+                },
                 listeners: {
                     tap: function() {
                         var resultViewModel = this.up('result').getViewModel();
                         let win = new Ext.window.Window({
-                            title: 'Snapshot: ' + resultViewModel.get('title'),
+                            title: 'Snapshot: ' + resultViewModel.get('param'),
                             width: 800,
                             height: 568,
                             closable: true,
@@ -72,37 +83,21 @@ Ext.define('ZirvaPortal.view.result.Result', {
                 xtype: 'component',
                 itemId: 'img-alt',
                 style: {
-                    'text-align': 'center'
+                    'text-align': 'center',
+                    'font-size': '11px',
                 },
-                html: '...'
+                html: '(loading)',
             }]
         },{
-            xtype: 'result-title',
-            bind: {
-                viewModel: {
-                    data: {
-                        title: '{param}',
-                    }
-                }
-            }
+            xtype: 'result-title'
         }]
-    },
-        {
-            flex: 1,
-            layout: 'fit',
-            xtype: 'dashboard',
-            margin: '10 0 0 0',
-            style: {
-                fontSize: '14px',
-                minHeight: '400px',
-            },
-            bind: {
-                viewModel: {
-                    data: {
-                        param: '{param}',
-                    }
-                }
-            }
-        }]
-
+    }, {
+        flex: 1,
+        layout: 'fit',
+        xtype: 'dashboard',
+        margin: '10 0 0 0',
+        style: {
+            minHeight: '342px',
+        }
+    }]
 });

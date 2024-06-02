@@ -1,6 +1,11 @@
 Ext.define('ZirvaPortal.store.PointStore', {
     extend: 'Ext.data.Store',
     alias: 'store.pointStore',
+
+    requires: [
+        'ZirvaPortal.config.Config'
+    ],
+
     storeId: 'pointStore',
     fields: [
         {name: 'ID', type: 'int'},
@@ -17,8 +22,8 @@ Ext.define('ZirvaPortal.store.PointStore', {
         }
     },
     listeners: {
-        beforeload: function(store, operation, eOpts) {
-            var token = LoginController.getUserStoreToken();
+        beforeload: function(store) {
+            let token = LoginController.getUserStoreToken();
             store.getProxy().setHeaders({
                 'Authorization': `Bearer ${token}`
             });

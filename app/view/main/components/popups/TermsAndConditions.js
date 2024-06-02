@@ -2,6 +2,10 @@ Ext.define('ZirvaPortal.view.main.components.popups.TermsAndConditions', {
     extend: 'Ext.window.Window',
     alias: 'terms-and-conditions',
 
+    requires: [
+        'Ext.layout.Fit'
+    ],
+
     title: 'Terms & Conditions',
     width: 400,
     height: 400,

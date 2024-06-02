@@ -2,6 +2,12 @@ Ext.define('ZirvaPortal.view.main.components.loginForm.LoginForm', {
     xtype: 'login-form',
     extend: 'Ext.form.Panel',
 
+    requires: [
+        'Ext.field.Text',
+        'Ext.layout.HBox',
+        'ZirvaPortal.view.main.components.loginForm.LoginFormController'
+    ],
+
     controller: 'login-form',
 
     layout: {

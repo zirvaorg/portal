@@ -18,7 +18,7 @@ Ext.define('ZirvaPortal.service.LoginService', {
                         const responseData = Ext.decode(response.responseText);
                         failureCallback(responseData);
                     } else {
-                        response.message = "Something went wrong."
+                        response.message = 'Something went wrong.'
                         failureCallback(response);
                     }
                 }

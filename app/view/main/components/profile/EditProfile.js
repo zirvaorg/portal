@@ -1,6 +1,14 @@
 Ext.define('ZirvaPortal.view.main.components.profile.EditProfile', {
     extend: 'Ext.form.Panel',
     alias: 'widget.edit-profile',
+
+    requires: [
+        'Ext.data.validator.Email',
+        'Ext.field.Password',
+        'Ext.field.Text',
+        'ZirvaPortal.view.main.components.profile.EditProfileController'
+    ],
+
     controller: 'edit-profile',
     bodyPadding: 10,
     flex: 1,

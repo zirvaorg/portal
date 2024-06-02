@@ -1,11 +1,11 @@
-Ext.define('ZirvaPortal.view.result.components.tabs.Whois', {
+Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
     extend: 'Ext.Container',
     xtype: 'tab-whois',
 
     requires: [
         'Ext.layout.HBox',
         'ZirvaPortal.store.WhoisStore',
-        'ZirvaPortal.view.result.components.container.ResultGrid'
+        'ZirvaPortal.view.result.domain.components.container.ResultGrid'
     ],
 
     layout: 'hbox',
@@ -34,8 +34,7 @@ Ext.define('ZirvaPortal.view.result.components.tabs.Whois', {
                 }
             }
         },
-        columns: [
-            {
+        columns: [{
                 text: 'Key', dataIndex: 'key', flex: 1,
                 renderer: function(value, record, dataIndex, cell) {
                     cell.setStyle({ fontWeight: 'bold', color: '#213547', textTransform: 'capitalize' });
@@ -70,6 +69,6 @@ Ext.define('ZirvaPortal.view.result.components.tabs.Whois', {
     onRender: function() {
         let param = this.up('result').getViewModel().get('param');
         let store = this.down('result-grid').getStore();
-        store.getProxy().setUrl(ZirvaPortal.config.Config.baseUrl + `/service/whois?domain=` + param);
+        store.getProxy().setUrl(`${ZirvaPortal.config.Config.baseUrl}/service/whois?domain=${param}`);
     }
 });

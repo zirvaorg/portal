@@ -1,4 +1,4 @@
-Ext.define('ZirvaPortal.view.result.components.container.Container', {
+Ext.define('ZirvaPortal.view.result.domain.components.container.Container', {
     extend: 'Ext.container.Container',
     xtype: 'dashboard',
 
@@ -6,12 +6,11 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
         'Ext.layout.Card',
         'Ext.tab.Panel',
         'Ext.layout.overflow.Scroller',
-        'ZirvaPortal.view.result.components.tabs.Health',
-        'ZirvaPortal.view.result.components.tabs.Whois'
+        'ZirvaPortal.view.result.domain.components.tabs.Health',
+        'ZirvaPortal.view.result.domain.components.tabs.Whois'
     ],
 
-    items: [
-        {
+    items: [{
             xtype: 'tabpanel',
             itemId: 'tabpanel',
             layout: {
@@ -26,8 +25,7 @@ Ext.define('ZirvaPortal.view.result.components.container.Container', {
                 },
             },
 
-            items: [
-                {
+            items: [{
                     title: 'Health',
                     iconCls: 'x-fa fa-heart-broken',
                     isPanelAdded: false,

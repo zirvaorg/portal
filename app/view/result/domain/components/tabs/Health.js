@@ -1,11 +1,11 @@
-Ext.define('ZirvaPortal.view.result.components.tabs.Health', {
+Ext.define('ZirvaPortal.view.result.domain.components.tabs.Health', {
     extend: 'Ext.Container',
     layout: 'hbox',
     xtype: 'tab-health',
 
     requires: [
         'Ext.layout.HBox',
-        'ZirvaPortal.view.result.components.container.ResultGrid'
+        'ZirvaPortal.view.result.domain.components.container.ResultGrid'
     ],
 
     items: [{

@@ -10,6 +10,7 @@ Ext.define('ZirvaPortal.view.main.components.searchBar.SearchBar', {
         specialkey: function (field, e) {
             if (e.getKey() === e.ENTER) {
                 TabSync.addTab(field.getValue());
+                e.preventDefault();
                 Ext.getCmp('searchBar').clearValue();
             }
         },

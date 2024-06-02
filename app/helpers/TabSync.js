@@ -1,35 +1,58 @@
 Ext.define('ZirvaPortal.helpers.TabSync', {
+
     singleton: true,
     alternateClassName: 'TabSync',
 
-    addTab: function (title) {
-        const urlPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
+    detectType: function (entry) {
+        const ipPattern = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+        const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const domainPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
 
-        let domain = title;
-        if (urlPattern.test(title)) {
-            domain = title.startsWith('http://') || title.startsWith('https://') ? title : 'http://' + title;
-            console.log("Valid URL ", domain);
-        } else {
-            console.log("Invalid URL");
+        if (ipPattern.test(entry)) {
+            return 'ip';
         }
 
-        let tabPanel = Ext.getCmp('mainTabPanel');
-        let newTab = tabPanel.add({
-            title: domain,
-            iconCls: 'x-fa fa-sitemap',
-            items: [{
-                xtype: 'result',
-                bodyPadding: '10 150',
-                viewModel: {
-                    data: {
-                        param: domain,
-                        img_src: '/resources/img/loading.svg',
-                    }
-                },
-            }],
-            closable: true,
-        });
-        tabPanel.setActiveItem(newTab);
+        if (emailPattern.test(entry)) {
+            return 'email';
+        }
+
+        if (domainPattern.test(entry)) {
+            return 'domain';
+        }
+    },
+
+    addTab: function (param) {
+        const type = this.detectType(param);
+        const tabPanel = Ext.getCmp('mainTabPanel');
+
+        if (type === 'domain') {
+            param = param.startsWith('http://') || param.startsWith('https://') ? param : 'http://' + param;
+            let newTab = tabPanel.add({
+                title: param,
+                iconCls: 'x-fa fa-sitemap',
+                items: [{
+                    xtype: 'result',
+                    bodyPadding: '10 150',
+                    viewModel: {
+                        data: {
+                            param: param,
+                            img_src: '/resources/img/loading.svg',
+                        }
+                    },
+                }],
+                closable: true,
+            });
+            tabPanel.setActiveItem(newTab);
+            return;
+        }
+
+        if (type === 'email') {
+            return Ext.Msg.alert('Error', 'Email search is not supported yet.');
+        }
+
+        if (type === 'ip') {
+            return Ext.Msg.alert('Error', 'IP search is not supported yet.');
+        }
     },
 
     addCustomTab: function (id, title, pageXType, iconCls) {

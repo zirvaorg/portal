@@ -1,4 +1,4 @@
-Ext.define('ZirvaPortal.view.result.Result', {
+Ext.define('ZirvaPortal.view.result.domain.Result', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.result',
 
@@ -6,8 +6,8 @@ Ext.define('ZirvaPortal.view.result.Result', {
         'Ext.layout.Fit',
         'Ext.layout.HBox',
         'Ext.layout.VBox',
-        'ZirvaPortal.view.result.components.container.Container',
-        'ZirvaPortal.view.result.components.title.Title'
+        'ZirvaPortal.view.result.domain.components.container.Container',
+        'ZirvaPortal.view.result.domain.components.title.Title'
     ],
 
     layout: {

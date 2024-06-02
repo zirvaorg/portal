@@ -1,4 +1,4 @@
-Ext.define('ZirvaPortal.view.result.components.container.ResultGrid', {
+Ext.define('ZirvaPortal.view.result.domain.components.container.ResultGrid', {
     extend: 'Ext.grid.Grid',
     xtype: 'result-grid',
     flex: 1,

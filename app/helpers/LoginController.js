@@ -52,7 +52,6 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
         if (profileToolbar) {
             mainToolbar.remove(profileToolbar);
         }
-       
     },
 
     getUserStoreToken: function() {

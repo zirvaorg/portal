@@ -1,4 +1,4 @@
-Ext.define('ZirvaPortal.view.result.components.title.Title', {
+Ext.define('ZirvaPortal.view.result.domain.components.title.Title', {
     extend: 'Ext.container.Container',
     alias: 'widget.result-title',
 

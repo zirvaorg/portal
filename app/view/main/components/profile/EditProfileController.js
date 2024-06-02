@@ -28,11 +28,6 @@ Ext.define('ZirvaPortal.view.main.components.profile.EditProfileController', {
                 if (responseData.success) {
                     Ext.Msg.alert('Success', 'Info updated successfully!');
                     form.up('window').close();
-
-                    // update user store email and username
-                    var user = LoginController.userStore.getAt(0);
-                    user.set({email: email, username: username});
-                    
                     Ext.GlobalEvents.fireEvent('userStoreUpdated');
                     
                 } else {

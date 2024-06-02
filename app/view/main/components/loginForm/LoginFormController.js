@@ -35,27 +35,11 @@ Ext.define('ZirvaPortal.view.main.components.loginForm.LoginFormController', {
             userData,
             function (responseData) {
                 if (responseData.success) {
-
-                    ZirvaPortal.service.ProfileService.getUserInfo(responseData.token, 
-                        function(userInfo) {
-                            LoginController.userStore.add({
-                                username: userInfo.username,
-                                email: userInfo.email,
-                                loggedIn: true,
-                                point: userInfo.remaining_point,
-                                registerDate: userInfo.registered_at,
-                                token: responseData.token
-
-                            });
-                           
-                            // Calling helpers loginController to load application when user login
-                            LoginController.login();
-                        },
-                        function(error) {
-                            Ext.Msg.alert('Error', 'Failed to retrieve user info.');
-                        }
-                    );
-
+                    ZirvaPortal.service.ProfileService.setUserInfo(responseData.token, function () {
+                        LoginController.login();
+                    }, function (error) {
+                        Ext.Msg.alert('Error', error.message);
+                    });
                 } else {
                     Ext.Msg.alert('Login Failure', responseData.message);
                 }
@@ -78,5 +62,5 @@ Ext.define('ZirvaPortal.view.main.components.loginForm.LoginFormController', {
             },
             closable: true,
         }).show();
-    }
+    },
 });

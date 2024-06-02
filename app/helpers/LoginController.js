@@ -2,6 +2,7 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     singleton: true,
     alternateClassName: 'LoginController',
     userStore: null,
+
     init: function() {
         this.userStore = Ext.getStore('userStore');
     },
@@ -11,7 +12,6 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
             if (this.userStore && this.userStore.getCount() > 0) {
                 const firstRecord = this.userStore.first();
                 if (firstRecord) {
-                    console.log("LoggedIn : ", firstRecord.get('loggedIn'));
                     return firstRecord.get('loggedIn');
                 }
             }
@@ -37,7 +37,6 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     },
 
     logout: function () {
-        console.log("First logout ", this.userStore);
         if (this.userStore) {
             this.userStore.removeAll();
             this.userStore.sync();
@@ -57,7 +56,7 @@ Ext.define('ZirvaPortal.helpers.LoginController', {
     },
 
     getUserStoreToken: function() {
-        var userstore = LoginController.userStore.getAt(0);
-        return userstore ? userstore.get('token') : null;
+        let userStore = LoginController.userStore.getAt(0);
+        return userStore ? userStore.get('token') : null;
     }
 });

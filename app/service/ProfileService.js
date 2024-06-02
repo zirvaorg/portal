@@ -54,5 +54,30 @@ Ext.define('ZirvaPortal.service.ProfileService', {
                 }
             }
         });
+    },
+
+    setUserInfo: function(token, successCallback, failureCallback) {
+        ZirvaPortal.service.ProfileService.getUserInfo(token,
+            function(userInfo) {
+                LoginController.userStore.removeAll();
+                LoginController.userStore.add({
+                    username: userInfo.username,
+                    email: userInfo.email,
+                    loggedIn: true,
+                    point: userInfo.remaining_point,
+                    registerDate: userInfo.registered_at,
+                    token: token
+                });
+
+                if (successCallback) {
+                    successCallback(userInfo);
+                }
+            },
+            function(response) {
+                if (failureCallback) {
+                    failureCallback(response);
+                }
+            },
+        );
     }
 });

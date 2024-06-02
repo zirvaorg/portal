@@ -53,13 +53,8 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
                     iconCls: 'fas fa-sign-out-alt',
                     text: 'Logout',
                     handler: function() {
-                        // Calling helpers loginController to load application when user logout
                         LoginController.logout();
-
-
                         Ext.Msg.alert('Success', 'You are now logged out.');
-
-                        
                     }
                 }
             ]
@@ -73,6 +68,6 @@ Ext.define('ZirvaPortal.view.main.components.profile.Profile', {
 
     onUserStoreUpdated: function() {
         var user = LoginController.userStore.getAt(0).data;
-        this.getViewModel().set({ username: user.username });
+        this.getViewModel().set({ username: user.username, point: user.point });
     }
 });

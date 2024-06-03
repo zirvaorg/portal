@@ -22,7 +22,7 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Subdomains', {
                 cell: {
                     encodeHtml: false
                 },
-                renderer: function(value, record, dataIndex, cell) {
+                renderer: function(value, record) {
                     if (record.data.ip != null) {
                         return '<i class="fa fa-check-circle" style="color:#4974af"></i>';
                     }
@@ -39,16 +39,15 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Subdomains', {
                     encodeHtml: false,
                     tpl: new Ext.XTemplate(
                         '<tpl for="ip">',
-                        '{.}<br />',
+                        '{.}<br/>',
                         '</tpl>'
-                    )
+                    ),
+                    // @TODO: Show new tab on click of IP
                 },
             },
-            { text: 'Registrar', dataIndex: 'registrar', flex: 3 },
+            { text: 'Registrar', dataIndex: 'registrar', flex: 2.5 },
             { text: 'Timestamp', dataIndex: 'timestamp', flex: 1 },
         ],
-
-
     }],
 
     onRender: function() {

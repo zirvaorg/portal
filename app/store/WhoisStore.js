@@ -6,6 +6,7 @@ Ext.define('ZirvaPortal.store.WhoisStore', {
         type: 'ajax',
         reader: {
             type: 'json',
+            rootProperty: 'whois'
         }
     },
     listeners: {

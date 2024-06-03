@@ -15,23 +15,26 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
         store: {
             type: 'whoisStore',
             listeners: {
-                load: function(store, records, successful, operation) {
-                    if (successful) {
-                        const whoisResponse = operation.getResponse().responseJson;
-                        const whoisData = whoisResponse.whois;
+                load: {
+                    fn: function(store, records, successful, operation) {
+                        if (successful) {
+                            const whoisResponse = operation.getResponse().responseJson;
+                            const whoisData = whoisResponse.whois;
 
-                        if (!whoisData || !whoisData.output) {
-                            return;
+                            if (!whoisData || !whoisData.output) {
+                                return;
+                            }
+
+                            const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
+                                .concat(Object.keys(whoisData.details)
+                                    .map(key => ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
+                            store.setData(parsedData);
+
+                            // @TODO: set whoisData.output to whoisOutput container's html
                         }
+                    },
+                },
 
-                        const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
-                            .concat(Object.keys(whoisData.details)
-                                .map(key =>  ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] }) ));
-                        store.setData(parsedData);
-
-                        // @todo: set whois output
-                    }
-                }
             }
         },
         columns: [{
@@ -69,6 +72,6 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
     onRender: function() {
         let param = this.up('result').getViewModel().get('param');
         let store = this.down('result-grid').getStore();
-        store.getProxy().setUrl(`${ZirvaPortal.config.Config.baseUrl}/service/whois?domain=${param}`);
+        store.getProxy().setUrl(`${ZirvaPortal.config.Config.baseUrl}service/whois?domain=${param}`);
     }
 });

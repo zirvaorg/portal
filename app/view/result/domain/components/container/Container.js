@@ -58,7 +58,7 @@ Ext.define('ZirvaPortal.view.result.domain.components.container.Container', {
                     listeners: {
                         activate: function() {
                             if (!this.isPanelAdded) {
-                                //
+                                this.add({ xtype: 'tab-subdomains' });
                                 this.isPanelAdded = true;
                             }
                         }

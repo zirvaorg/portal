@@ -28,8 +28,6 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
                             .concat(Object.keys(whoisData.details)
                                 .map(key => ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
                         store.setData(parsedData);
-
-                        // @TODO: set whoisData.output to whoisOutput container's html
                     }
                 },
 

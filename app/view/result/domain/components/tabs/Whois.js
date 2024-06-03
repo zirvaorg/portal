@@ -71,5 +71,10 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
         let param = this.up('result').getViewModel().get('param');
         let store = this.down('result-grid').getStore();
         store.getProxy().setUrl(`${ZirvaPortal.config.Config.baseUrl}service/whois?domain=${param}`);
+
+        let whoisContainer = this.down('#whoisOutput');
+        store.load(function (records, operation) {
+            whoisContainer.setHtml(`<pre>${operation.getResponse().responseJson.whois.output}</pre>`).unmask();
+        });
     }
 });

@@ -6,7 +6,7 @@ Ext.define('ZirvaPortal.helpers.TabSync', {
     detectType: function (entry) {
         const ipPattern = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
         const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-        const domainPattern = /^([http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))$/;
+        const domainPattern = /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{1,63}\.)+[a-zA-Z]{2,6}(:[0-9]{1,5})?(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?$/;
 
         if (ipPattern.test(entry)) {
             return 'ip';

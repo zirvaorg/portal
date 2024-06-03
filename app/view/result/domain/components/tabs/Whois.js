@@ -15,24 +15,22 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Whois', {
         store: {
             type: 'whoisStore',
             listeners: {
-                load: {
-                    fn: function(store, records, successful, operation) {
-                        if (successful) {
-                            const whoisResponse = operation.getResponse().responseJson;
-                            const whoisData = whoisResponse.whois;
+                load: function(store, records, successful, operation) {
+                    if (successful) {
+                        const whoisResponse = operation.getResponse().responseJson;
+                        const whoisData = whoisResponse.whois;
 
-                            if (!whoisData || !whoisData.output) {
-                                return;
-                            }
-
-                            const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
-                                .concat(Object.keys(whoisData.details)
-                                    .map(key => ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
-                            store.setData(parsedData);
-
-                            // @TODO: set whoisData.output to whoisOutput container's html
+                        if (!whoisData || !whoisData.output) {
+                            return;
                         }
-                    },
+
+                        const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
+                            .concat(Object.keys(whoisData.details)
+                                .map(key => ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
+                        store.setData(parsedData);
+
+                        // @TODO: set whoisData.output to whoisOutput container's html
+                    }
                 },
 
             }

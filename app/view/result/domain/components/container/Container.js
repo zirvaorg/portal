@@ -26,6 +26,18 @@ Ext.define('ZirvaPortal.view.result.domain.components.container.Container', {
             },
 
             items: [{
+                    title: 'DNS',
+                    iconCls: 'x-fa fa-info-circle',
+                    isPanelAdded: false,
+                    listeners: {
+                        activate: function() {
+                            if (!this.isPanelAdded) {
+                                this.add({ });
+                                this.isPanelAdded = true;
+                            }
+                        }
+                    }
+                },{
                     title: 'Health',
                     iconCls: 'x-fa fa-heart-broken',
                     isPanelAdded: false,
@@ -65,31 +77,18 @@ Ext.define('ZirvaPortal.view.result.domain.components.container.Container', {
                     }
                 },
                 {
-                    title: 'DNS History',
-                    iconCls: 'x-fa fa-history',
+                    title: 'Ports',
+                    iconCls: 'x-fa fa-network-wired',
                     isPanelAdded: false,
                     listeners: {
                         activate: function() {
                             if (!this.isPanelAdded) {
-                                //
+                                this.add({ xtype: 'tab-ports' });
                                 this.isPanelAdded = true;
                             }
                         }
                     }
                 },
-                {
-                    title: 'MX Records',
-                    iconCls: 'x-fa fa-envelope',
-                    isPanelAdded: false,
-                    listeners: {
-                        activate: function() {
-                            if (!this.isPanelAdded) {
-                                //
-                                this.isPanelAdded = true;
-                            }
-                        }
-                    }
-                }
             ]
         }
     ]

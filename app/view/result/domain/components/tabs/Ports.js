@@ -201,7 +201,7 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Ports', {
         progressBar.show();
 
         xhr.onprogress = function() {
-            let progressIncrement = Math.random() * 0.4 + 0.6;
+            let progressIncrement = 0.1;
             let currentProgress = progressBar.getValue();
             let newProgress = currentProgress + progressIncrement;
             if (newProgress > 1) newProgress = 1;
@@ -225,10 +225,10 @@ Ext.define('ZirvaPortal.view.result.domain.components.tabs.Ports', {
                         if (part.trim().length > 0) {
                             let result = JSON.parse(part);
                             let existing = portContainer.getHtml();
-                            let numberOfDots = 45 - `${result.service}${result.port}`.length;
+                            let numberOfDots = 45 - `${result.proto}/${result.port} ${result.service}`.length;
 
                             let c = result.open ? 'green' : 'red';
-                            let newContent = `<span style="color:${c}">${result.port} ${result.service} ${'.'.repeat(numberOfDots)} ${result.message}</span>`;
+                            let newContent = `${result.proto}/${result.port} ${result.service} ${'.'.repeat(numberOfDots)} <span style="color:${c}">${result.message}</span>`;
                             portContainer.setHtml(`${newContent}<br/>${existing}`);
                         }
                     });

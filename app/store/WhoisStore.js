@@ -15,6 +15,21 @@ Ext.define('ZirvaPortal.store.WhoisStore', {
             store.getProxy().setHeaders({
                 'Authorization': `Bearer ${token}`
             });
+        },
+        load: function(store, records, successful, operation) {
+            if (successful) {
+                const whoisResponse = operation.getResponse().responseJson;
+                const whoisData = whoisResponse.whois;
+
+                if (!whoisData || !whoisData.output) {
+                    return;
+                }
+
+                const parsedData = [{ key: 'whois server', value: whoisData.whois_server }]
+                    .concat(Object.keys(whoisData.details)
+                        .map(key => ({ key: key.replace(/_/g, ' '), value: whoisData.details[key] })));
+                store.setData(parsedData);
+            }
         }
     },
     autoLoad: true
